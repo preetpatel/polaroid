@@ -9,7 +9,7 @@ class App extends Component {
       <div>
         <Header/>
         <div>
-          <Post nickname="Chris" avatar="https://www.laravelnigeria.com/img/chris.jpg" caption="Moving the community!" image="https://pbs.twimg.com/media/DOXI0IEXkAAkokm.jpg"/>
+          <Post username="Chris" avatar="https://www.laravelnigeria.com/img/chris.jpg" caption="Moving the community!" image="https://pbs.twimg.com/media/DOXI0IEXkAAkokm.jpg" likes='0'/>
         </div>
       </div>
     );

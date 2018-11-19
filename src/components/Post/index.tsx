@@ -3,10 +3,11 @@ import {Component} from 'react';
 import "./Post.css"
 
 interface IProps {
-	nickname: any,
+	username: any,
 	avatar: any,
 	image: any,
-	caption: any
+  caption: any,
+  likes: any
 }
 
 class Post extends Component<IProps, {}> {
@@ -16,7 +17,7 @@ class Post extends Component<IProps, {}> {
             this.myRef= "Post";
         }
       public render() {
-        const nickname = this.props.nickname;
+        const username = this.props.username;
         const avatar = this.props.avatar;
         const image = this.props.image;
         const caption = this.props.caption;
@@ -24,10 +25,10 @@ class Post extends Component<IProps, {}> {
             <header>
               <div className="Post-user">
                 <div className="Post-user-avatar">
-                  <img src={avatar} alt={nickname} />
+                  <img src={avatar} alt={username} />
                 </div>
-                <div className="Post-user-nickname">
-                  <span>{nickname}</span>
+                <div className="Post-user-username">
+                  <span>{username}</span>
                 </div>
               </div>
             </header>
@@ -37,7 +38,7 @@ class Post extends Component<IProps, {}> {
               </div>
             </div>
             <div className="Post-caption">
-              <strong>{nickname}</strong> {caption}
+              <strong>{username}</strong> {caption}
             </div>
           </article>;
         }

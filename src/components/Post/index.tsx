@@ -51,7 +51,7 @@ class Post extends Component<IProps, IState> {
           <img alt={caption} src={image} onDoubleClick={this.handleDoubleClick} />
         </div>
       </div>
-      <div className="Post-caption">
+      <div className="Post-caption Text-behave">
         <strong>{username}</strong> {caption}
         <div className="float-right">
           <img className="Like-image" src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Love_Heart_symbol.svg" /> {likes}

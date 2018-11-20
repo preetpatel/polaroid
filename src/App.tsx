@@ -31,6 +31,7 @@ class App extends Component<{},IState> {
     if (this.state.isLoggedIn) {
       fbContent = (<div>
         <Header avatar={this.state.userAvatar} name={this.state.userName}/>
+        <div className="pb-3"/>
         <Posts posts={this.state.posts}/>
       </div>);
     } else {

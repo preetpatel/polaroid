@@ -50,3 +50,8 @@
     height: 16px;
     width: 16px
   }
+
+  .Text-behave {
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }

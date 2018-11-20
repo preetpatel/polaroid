@@ -3,6 +3,7 @@ import {Component} from 'react';
 import './App.css';
 import Header from './components/Header/index';
 import Posts from './components/Posts/index';
+import FacebookLogin from 'react-facebook-login';
 
 interface IState {
 	posts: any[],
@@ -20,11 +21,21 @@ class App extends Component<{},IState> {
     return (
       <div>
         <Header/>
+        <FacebookLogin
+        appId="820688131602902"
+        autoLoad={true}
+        fields="name,email,picture"
+        callback={this.responseFacebook}
+      />
         <div>
           <Posts posts={this.state.posts}/>
         </div>
       </div>
     );
+  }
+
+  public responseFacebook(response: any) {
+    console.log(response)
   }
 
   private fetchMemes() {

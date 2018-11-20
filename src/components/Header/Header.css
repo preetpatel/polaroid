@@ -28,3 +28,13 @@
       width: 176px;
       text-indent: -1000%
     }
+
+    .Polaroid-user-avatar {
+      width: 30px;
+      height: 30px;
+    }
+    .Polaroid-user-avatar img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }

@@ -6,40 +6,61 @@ import Posts from './components/Posts/index';
 import FacebookLogin from 'react-facebook-login';
 
 interface IState {
-	posts: any[],
+  posts: any[],
+  userEmail: any,
+  userName: any,
+  userAvatar: any,
+  isLoggedIn: boolean,
 }
 class App extends Component<{},IState> {
   public constructor(props:any){
     super(props)
     this.state= {
-      posts: [{"username":"Chris", "avatar":"https://www.laravelnigeria.com/img/chris.jpg", "caption":"Loading posts", "image":"https://pbs.twimg.com/media/DOXI0IEXkAAkokm.jpg", "likes": "0"}]
+      isLoggedIn: false,
+      posts: [{"username":"Chris", "avatar":"https://www.laravelnigeria.com/img/chris.jpg", "caption":"Loading posts", "image":"https://pbs.twimg.com/media/DOXI0IEXkAAkokm.jpg", "likes": "0"}],
+      userEmail: null,
+      userName: null,
+      userAvatar: "https://www.laravelnigeria.com/img/chris.jpg"
     }
     this.fetchMemes = this.fetchMemes.bind(this)
     this.fetchMemes()
   }
   public render() {
-    return (
-      <div>
-        <Header/>
+    let fbContent;
+
+    if (this.state.isLoggedIn) {
+      fbContent = (<div>
+        <Header avatar={this.state.userAvatar} name={this.state.userName}/>
+        <Posts posts={this.state.posts}/>
+      </div>);
+    } else {
+      fbContent = (
         <FacebookLogin
         appId="820688131602902"
         autoLoad={true}
         fields="name,email,picture"
         callback={this.responseFacebook}
       />
-        <div>
-          <Posts posts={this.state.posts}/>
-        </div>
+      )
+    }
+    return (
+      <div>
+        {fbContent}
       </div>
     );
   }
 
-  public responseFacebook(response: any) {
-    console.log(response)
+  public responseFacebook = (response:any) => {
+    this.setState({
+      userEmail: response.email,
+      userAvatar: response.picture.data.url,
+      userName: response.name,
+      isLoggedIn: true
+    })
   }
 
   private fetchMemes() {
-		const url = "http://polaroidappapi.azurewebsites.net/api/postitems"
+		const url = "https://apipolaroid.azurewebsites.net/api/postitems"
 		fetch(url, {
 			method: 'GET'
 		})

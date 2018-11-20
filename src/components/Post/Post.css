@@ -45,3 +45,8 @@
     visibility: hidden;
     opacity: 0;
   }
+
+  .Like-image {
+    height: 16px;
+    width: 16px
+  }

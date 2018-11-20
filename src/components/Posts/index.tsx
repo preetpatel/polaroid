@@ -22,13 +22,13 @@ class Posts extends Component<IProps, {}> {
         const postsCollection:any[] = []
         const postList = this.props.posts
         if (postList == null) {
-            return <Post username="Loading" avatar="https://www.laravelnigeria.com/img/chris.jpg" caption="No Posts Found" image="https://pbs.twimg.com/media/DOXI0IEXkAAkokm.jpg" likes='0'/>
+            return <Post id="0" email="null" uploadedDate="null" username="Loading" avatar="https://www.laravelnigeria.com/img/chris.jpg" caption="No Posts Found" image="https://pbs.twimg.com/media/DOXI0IEXkAAkokm.jpg" likes='0'/>
         }
 
         // tslint:disable-next-line:prefer-for-of
          for (let i = 0; i < postList.length; i++) {
              const currentPost = postList[i];
-             postsCollection.push(<div key={i+""} id={i+""}><Post username={currentPost.username} avatar="https://image.flaticon.com/icons/svg/168/168724.svg" caption={currentPost.caption} image={currentPost.imageURL} likes={currentPost.likes}/></div>)
+             postsCollection.push(<div key={i+""} id={i+""}><Post id={currentPost.id} email={currentPost.email} uploadedDate={currentPost.uploaded} username={currentPost.username} avatar={currentPost.avatarURL} caption={currentPost.caption} image={currentPost.imageURL} likes={currentPost.likes}/></div>)
          }
         return postsCollection
     }

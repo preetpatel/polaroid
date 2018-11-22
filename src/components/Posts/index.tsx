@@ -3,10 +3,14 @@ import {Component} from 'react';
 import Post from '../Post/index';
 
 interface IProps {
-    posts: any[],
+    user: any,
 }
 
-class Posts extends Component<IProps, {}> {
+interface IState {
+    posts: Post[]
+}
+
+class Posts extends Component<IProps, IState> {
     public constructor(props:any) {
         super(props)
         this.createPosts = this.createPosts.bind(this)
@@ -20,7 +24,7 @@ class Posts extends Component<IProps, {}> {
 
     private createPosts() {
         const postsCollection:any[] = []
-        const postList = this.props.posts
+        const postList = this.props.user
         if (postList == null) {
             return <Post id="0" email="null" uploadedDate="null" username="Loading" avatar="https://www.laravelnigeria.com/img/chris.jpg" caption="No Posts Found" image="https://pbs.twimg.com/media/DOXI0IEXkAAkokm.jpg" likes='0'/>
         }

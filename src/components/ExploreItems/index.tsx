@@ -17,7 +17,8 @@ class ExploreItems extends Component<IProps, {}> {
     public render() {
         require("src/components/ExploreItems/ExploreItems.css")
         return (
-            <a style={{textDecoration: 'none', color:'black'}} href={"/profile?id=" + this.props.userID} className="card card-signin mt-3">
+            <div className="card card-signin mt-3">
+            <a style={{textDecoration: 'none', color:'black'}} href={"/profile?id=" + this.props.userID}>
                 <div className="user-profile mt-3">
                     <img className="avatar" src={this.props.userAvatarUrl} alt="Ash" />
                     <div className="username">{this.props.userUserName}</div>
@@ -29,6 +30,7 @@ class ExploreItems extends Component<IProps, {}> {
                      </div>
                 </div>
             </a>
+            </div>
         )
     }
 }

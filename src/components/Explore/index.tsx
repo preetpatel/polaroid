@@ -17,6 +17,7 @@ class Explore extends Component<{}, IState> {
     }
 
     public render() {
+        require("src/components/Explore/Explore.css")
         return (
             <Router>
                 <div className="container">
@@ -26,6 +27,7 @@ class Explore extends Component<{}, IState> {
         );
     }
 
+    
     private fetchPostsForProfile = async () => {
 
         const urlGetUsers = "https://apipolaroid.azurewebsites.net/api/UserItems"
@@ -48,7 +50,7 @@ class Explore extends Component<{}, IState> {
         for (let i = 0; i < json.length; i++) {
             accountsCollection.push(
                 <div>
-                    <ExploreItems userID={json[i].id} userName={json[i].name} userUserName={json[i].username} userAvatarUrl={json[i].avatarURL} userBio={json[i].bio}/>
+                    <ExploreItems userID={json[i].id} userName={json[i].name} userUserName={json[i].username} userAvatarUrl={json[i].avatarURL} userBio={json[i].bio} />
                 </div>
             )
         }
@@ -56,7 +58,7 @@ class Explore extends Component<{}, IState> {
             userAccounts: accountsCollection
         })
 
-    } 
+    }
 }
 
 export default (Explore);

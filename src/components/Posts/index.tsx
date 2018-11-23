@@ -68,10 +68,10 @@ class Posts extends Component<IProps, IState> {
         const firstPost = json[0]
         if (firstPost === undefined) {
           json[0] = {
-            "id": 1,
-            "userID": 1,
-            "imageURL": "https://pbs.twimg.com/media/DOXI0IEXkAAkokm.jpg",
-            "caption": "Welp! You aren't following anyone",
+            "id": null,
+            "userID": "",
+            "imageURL": "https://sophosnews.files.wordpress.com/2015/09/shutterstock_289142876.jpg?w=780&h=408&crop=1",
+            "caption": "Welp! You aren't following anyone. You can explore users from the button above",
             "uploaded": "2018-11-21T22:29:49.778365",
             "likes": 0
           }

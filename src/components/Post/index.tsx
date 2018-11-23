@@ -41,10 +41,13 @@ class Post extends Component<IProps, IState> {
     const caption = this.props.caption;
     const likes = this.state.likes;
 
-    return (
-    <article className="Post" ref={this.myRef}>
-    <div className="card card-signin">
-      <header>
+    let postInfo = (
+      <div className="Post-user"/>
+    )
+
+    
+    if(this.props.id !== null) {
+      postInfo = (
         <NavLink to={"/profile?id=" + this.props.userID} style={{textDecoration: 'none', color:'black'}} className="Post-user">
           <div className="Post-user-avatar">
             <img src={avatar} alt={username} />
@@ -53,6 +56,14 @@ class Post extends Component<IProps, IState> {
             <span>{username}</span>
           </div>
         </NavLink>
+      )
+    }
+
+    return (
+    <article className="Post" ref={this.myRef}>
+    <div className="card card-signin">
+      <header>
+        {postInfo}
       </header>
       <div className="Post-image">
         <div className="Post-image-bg">

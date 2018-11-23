@@ -1,40 +1,61 @@
 import * as React from "react";
+import { Redirect } from 'react-router-dom'
 import {
     Container, Col,
     FormGroup, Label, Input,
     Button, FormFeedback
 } from 'reactstrap';
 
-interface IProps {
-    avatar: any,
-    name: any,
-    email: any,
-    completionHandler: any
-}
-
 interface IState {
     usernameValid: any
     userName: any,
-    bio: any
+    bio: any,
+    name: any,
+    email: any,
+    avatarUrl: any,
+    registrationComplete: boolean
 }
-class Registration extends React.Component<IProps, IState>{
+class Registration extends React.Component<{}, IState>{
 
     public constructor(props: any) {
         super(props)
-        this.state = {
-            usernameValid: "",
-            bio: "",
-            userName: ""   
+
+        const userData = localStorage.getItem("userData");
+        if (userData != null) {
+            const userDataJSON = JSON.parse(userData)
+            this.state = {
+                usernameValid: "",
+                bio: "",
+                userName: "" ,
+                name: userDataJSON.name,
+                email: userDataJSON.email,
+                avatarUrl: userDataJSON.avatarUrl,
+                registrationComplete: false, 
+            } 
+        } else {
+            this.state = {
+                usernameValid: "",
+                bio: "",
+                userName: "" ,
+                name: "",
+                email: "",
+                avatarUrl: "",
+                registrationComplete: true, 
+            } 
         }
     }
 
     public render() {
         require('./Registration.css');
+        let redirection;
+        if (this.state.registrationComplete) {
+            redirection = (<Redirect to="/login"/> )
+        }
         return (
             <Container className="App pt-3">
-
+                {redirection}
                 <div className="">
-                    <h2>Hey, {this.props.name}!</h2>
+                    <h2>Hey, {this.state.name}!</h2>
                 </div>
                 <h3 className="text-center text-justify">We just need a few more details</h3>
                 <div className="form">
@@ -46,7 +67,7 @@ class Registration extends React.Component<IProps, IState>{
                                 name="email"
                                 id="exampleEmail"
                                 disabled= {true}
-                                placeholder={this.props.email}
+                                placeholder={this.state.email}
                             />
                         </FormGroup>
                     </Col>
@@ -98,9 +119,9 @@ class Registration extends React.Component<IProps, IState>{
 
             const formData = new FormData()
 		    formData.append("username", this.state.userName)
-            formData.append("name", this.props.name)
-            formData.append("email", this.props.email)
-            formData.append("avatarURL", this.props.avatar)
+            formData.append("name", this.state.name)
+            formData.append("email", this.state.email)
+            formData.append("avatarURL", this.state.avatarUrl)
             formData.append("bio", this.state.bio)
             const url = "https://apipolaroid.azurewebsites.net/api/UserItems"
             fetch(url, {
@@ -113,7 +134,9 @@ class Registration extends React.Component<IProps, IState>{
                         // Error State
                         alert(response.statusText)
                     } else {
-                      this.props.completionHandler();
+                      this.setState({
+                          registrationComplete: true
+                      })
                     }
                 })
         }

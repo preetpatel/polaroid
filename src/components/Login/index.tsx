@@ -9,12 +9,13 @@ const configureLoginProps = {
     cookie: false,
     version: 2.6,
     language: 'en_US',
-    appId: '820688131602902'
+    appId: '820688131602902',
 }
 
 interface IProps {
     fb: any,
     history: any
+
 }
 
 class Login extends Component<IProps, {}> {
@@ -28,8 +29,12 @@ class Login extends Component<IProps, {}> {
         this.login = this.props.fb.login
         this.logout = this.props.fb.logout
 
-        if(localStorage.getItem("userData") != null) {
-            this.props.history.push("/");
+        const userData = localStorage.getItem("userData")
+        if (userData != null) {
+            const userDataJSON = JSON.parse(userData)
+            if (userDataJSON.userName != null) {
+                this.props.history.push("/");
+            }
         }
     }
 
@@ -49,13 +54,18 @@ class Login extends Component<IProps, {}> {
             bio: null
         })
 
-        const accessToken =  res.accessToken
+        const accessToken = res.accessToken
         const userInfoUrl = "https://graph.facebook.com/me?fields=name,email,picture.height(152)&access_token=" + accessToken
         const response = await fetch(userInfoUrl, { method: 'GET' });
         const json = await response.json();
-        userData.email =  json.email
-        userData.name =  json.name
+        userData.email = json.email
+        userData.name = json.name
         userData.avatarUrl = json.picture.data.url
+
+        if (json.email === undefined) {
+            localStorage.clear()
+            this.props.history.push("/login")
+        }
 
         const userInfoFromAPI = "https://apipolaroid.azurewebsites.net/api/UserItems/byEmail/" + userData.email
         const responseFromAPI = await fetch(userInfoFromAPI, { method: 'GET' });

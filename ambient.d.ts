@@ -1,6 +1,10 @@
 declare module 'react-globally';
 declare module 'react-popupbox';
 declare module 'react-facebook-login-hoc'
+declare module 'react-responsive-modal'
+declare module 'downshift'
+declare module 'react-file-picker'
+declare module 'react-html5-camera-photo'
 
 // Type definitions for Facebook Javascript SDK
 // Project: https://developers.facebook.com/docs/javascript

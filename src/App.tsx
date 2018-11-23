@@ -20,6 +20,7 @@ interface IState {
   }
   isLoggedIn: boolean,
 }
+
 class App extends Component<{}, IState> {
   public constructor(props: any) {
     super(props)
@@ -34,8 +35,12 @@ class App extends Component<{}, IState> {
       },
       isLoggedIn: false
     }
-
   }
+
+  public componentDidMount = () => {
+    this.updateState()
+  }
+
   public render() {
 
     // Loads home page with posts from users they are following
@@ -53,11 +58,11 @@ class App extends Component<{}, IState> {
         }/>
 
         <Route path="/login" render={
-          () => <Login />
+          () => <Login/>
         }/>
 
         <Route path="/completeregistration" exact render={
-          () => <Registration completionHandler={this.handleCompletedRegistration} name={this.state.user.name} avatar={this.state.user.avatarUrl} email={this.state.user.email} /> 
+          () => <Registration /> 
         }/>
 
         <Route path="/logout" exact render={
@@ -69,75 +74,46 @@ class App extends Component<{}, IState> {
     );
   }
 
-  public handleCompletedRegistration = () => {
-    console.log("registration complete")
-  }
+public updateState = () => {
+  // this.setState((previousState: any, currentProps: any) => {
+  //   return { ...previousState, 
+  //     user: {
+  //       id: localStorage.getItem("userData.userName")
+  //     }
+  //   }
+  // })
+  console.log(localStorage.getItem("userData"))
+}
 
-  public responseFacebook = async (response: any) => {
-    this.setState((previousState: any, currentProps: any) => {
-      return {
-        ...previousState, userEmail: response.email,
-        userAvatar: response.picture.data.url,
-        userName: response.name,
-        isLoggedIn: true
-      }
-    })
+  // private fetchPosts = async () => {
+  //   let allUsersIFollow;
+  //   const userID = localStorage.getItem("userItem.id");
+  //   const url = "https://apipolaroid.azurewebsites.net/api/Relationships/following/" + userID
+  //   const followingResponse = await fetch(url, { method: 'GET' });
+  //   const followingjson = await followingResponse.json;
+  //   allUsersIFollow = followingjson
 
-    localStorage.setItem('userInfo.email', response.email);
-    localStorage.setItem('userInfo.avatar', response.picture.data.url)
-    localStorage.setItem('userInfo.name', response.name)
-    await this.getDatabaseAccount();
-  }
+  //   console.log(allUsersIFollow)
+  //   const urlGetPosts = "https://apipolaroid.azurewebsites.net/api/postitems"
+  //   const response = await fetch(urlGetPosts, { method: 'GET' });
+  //   const json = await response.json;
 
-
-  private getDatabaseAccount = async () => {
-    const userInfoUrl = "https://apipolaroid.azurewebsites.net/api/UserItems/byEmail/" + localStorage.getItem("userInfo.email")
-    const response = await fetch(userInfoUrl, { method: 'GET' });
-    const json = await response.json;
-
-    const loadedProfile = json[0]
-    if (loadedProfile === undefined) {
-      console.log("No user Profile found on server")
-    } else {
-      localStorage.setItem("userItem.username", loadedProfile.username)
-      localStorage.setItem("userItem.bio", loadedProfile.bio)
-      localStorage.setItem("userItem.id", loadedProfile.id)
-      this.setState((previousState: any, currentProps: any) => {
-        return { ...previousState, haveCompletedProfile: true }
-      })
-    }
-    this.fetchPosts();
-  }
-
-  private fetchPosts = async () => {
-    let allUsersIFollow;
-    const userID = localStorage.getItem("userItem.id");
-    const url = "https://apipolaroid.azurewebsites.net/api/Relationships/following/" + userID
-    const followingResponse = await fetch(url, { method: 'GET' });
-    const followingjson = await followingResponse.json;
-    allUsersIFollow = followingjson
-
-    console.log(allUsersIFollow)
-    const urlGetPosts = "https://apipolaroid.azurewebsites.net/api/postitems"
-    const response = await fetch(urlGetPosts, { method: 'GET' });
-    const json = await response.json;
-
-    // If no posts are returned, then set a default post that says that you dont follow anyone
-    const firstPost = json[0]
-    if (firstPost === undefined) {
-      json[0] = {
-        "id": 1,
-        "userID": 1,
-        "imageURL": "https://pbs.twimg.com/media/DOXI0IEXkAAkokm.jpg",
-        "caption": "Welp! You aren't following anyone",
-        "uploaded": "2018-11-21T22:29:49.778365",
-        "likes": 0
-      }
-    }
-    this.setState((previousState: any, currentProps: any) => {
-      return { ...previousState, posts: json }
-    })
-  }
+  //   // If no posts are returned, then set a default post that says that you dont follow anyone
+  //   const firstPost = json[0]
+  //   if (firstPost === undefined) {
+  //     json[0] = {
+  //       "id": 1,
+  //       "userID": 1,
+  //       "imageURL": "https://pbs.twimg.com/media/DOXI0IEXkAAkokm.jpg",
+  //       "caption": "Welp! You aren't following anyone",
+  //       "uploaded": "2018-11-21T22:29:49.778365",
+  //       "likes": 0
+  //     }
+  //   }
+  //   this.setState((previousState: any, currentProps: any) => {
+  //     return { ...previousState, posts: json }
+  //   })
+  // }
 
 }
 export default App;

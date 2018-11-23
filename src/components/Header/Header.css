@@ -1,4 +1,14 @@
     /* src/components/Header/Header.css */
+
+    body {
+      background: #9CECFB;
+      /* fallback for old browsers */
+      background: -webkit-linear-gradient(to right, #ff4b1f,#aa557f, #1fddff);
+      /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to right, #ff4b1f, #aa557f, #1fddff);
+      /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+    
     i.Nav {
       background-color: #fff;
       border-bottom: 1px solid rgba(0, 0, 0, 0.0975);

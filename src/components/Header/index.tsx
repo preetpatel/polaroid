@@ -3,7 +3,7 @@ import * as React from "react";
 import { Component } from 'react';
 import "./Header.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSignOutAlt, faUserCircle, faUpload } from '@fortawesome/free-solid-svg-icons'
+import { faSignOutAlt, faUserCircle, faUpload, faSearchLocation } from '@fortawesome/free-solid-svg-icons'
 import { NavLink } from 'react-router-dom'
 import LoginHOC from 'react-facebook-login-hoc';
 import Modal from 'react-responsive-modal';
@@ -50,7 +50,8 @@ class Header extends Component<IProps, IState>{
       profileContent = (
         <div className="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
           <div className="pr-4">
-            <button className="btn profile-edit-btn" onClick={this.onOpenModal}><FontAwesomeIcon icon={faUpload} /></button>
+          <NavLink to="/explore" style={{ backgroundColor: '#DDDDDD', color: 'black' }} className="btn mr-2" title="Find Users" ><FontAwesomeIcon icon={faSearchLocation} /></NavLink>
+            <button className="btn" onClick={this.onOpenModal}  title="Upload" ><FontAwesomeIcon icon={faUpload} /></button>
             <Modal open={open} onClose={this.onCloseModal} center>
               <div className="form pt-3">
                 <h2>Upload an image</h2>
@@ -65,30 +66,43 @@ class Header extends Component<IProps, IState>{
                     />
                   </div>
                 </div>
-              </div>
-             
-              <label className="col-form-label">Choose a method</label>
-              <div className="btn-toolbar"style={{flexWrap: 'nowrap'}}>
-              <button className="btn btn-primary" type="button" data-toggle="collapse" data-target="#takePicture" aria-expanded="false" aria-controls="takePicture">
-                Take a picture
+                <div className="form-group row ml-2">
+                  <label className="col-form-label">Choose a method</label>  
+                  </div>
+                <div className="form-group row ml-2">    
+                  <div className="btn-toolbar" style={{ flexWrap: 'nowrap' }}>
+                    <button className="btn btn-primary mr-2" type="button" data-toggle="collapse" data-target="#takePicture" aria-expanded="false" aria-controls="takePicture">
+                      Take a picture
               </button>
               <button className=" btn btn-primary" type="button" data-toggle="collapse" data-target="#uploadPicture" aria-expanded="false" aria-controls="uploadPicture">
-                Upload a picture
+                      Upload a picture
               </button>
               </div>
              
-              <div className="collapse form-group row" id="uploadPicture">
-              <input type="file" onChange={this.handleFileUpload} className="pl-4 form-control-file" id="polaroid-image-input" />
+                    
+                  
+                </div>
+
+                <div className="form-group row">
+                  <div className="collapse form-group row" id="uploadPicture">
+                    <input type="file" onChange={this.handleFileUpload} className="pl-4 form-control-file" id="polaroid-image-input" />
+                  </div>
+                  <div className="collapse pt-4 form-group row" id="takePicture">
+                    <div className="col-sm-12">
+                      <Camera
+                        onTakePhoto={(dataUri: any) => { this.onTakePhoto(dataUri); }}
+                        isMaxResolution={true}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="form-group row ml-2">
+                  <Button className="pl-4" onClick={this.uploadPhoto}>Upload Image</Button>
+                </div>
+
+
               </div>
-              <div className="collapse pt-4 form-group row" id="takePicture">
-              <div className="col-sm-12">
-              <Camera
-                onTakePhoto = { (dataUri: any) => { this.onTakePhoto(dataUri); } }
-                isMaxResolution = {true}
-              />
-              </div>
-              </div>
-              <Button className="pl-4" onClick={this.uploadPhoto}>Upload Image</Button>
+
 
             </Modal>
           </div>
@@ -183,7 +197,7 @@ class Header extends Component<IProps, IState>{
   }
 
   public onTakePhoto = (dataUri: any) => {
-    
+
     const imageBlob = this.dataURItoBlob(dataUri)
     const imageFile = this.blobToFile(imageBlob, "Image from camera")
     this.setState({
@@ -192,13 +206,13 @@ class Header extends Component<IProps, IState>{
     console.log(imageFile)
   }
 
-  public dataURItoBlob(dataURI:any) {
+  public dataURItoBlob(dataURI: any) {
     // convert base64/URLEncoded data component to raw binary data held in a string
     let byteString;
     if (dataURI.split(',')[0].indexOf('base64') >= 0) {
-        byteString = atob(dataURI.split(',')[1]);
-    }else{
-        byteString = unescape(dataURI.split(',')[1]);
+      byteString = atob(dataURI.split(',')[1]);
+    } else {
+      byteString = unescape(dataURI.split(',')[1]);
     }
     // separate out the mime component
     const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
@@ -206,21 +220,21 @@ class Header extends Component<IProps, IState>{
     // write the bytes of the string to a typed array
     const ia = new Uint8Array(byteString.length);
     for (let i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
+      ia[i] = byteString.charCodeAt(i);
     }
 
-    return new Blob([ia], {type:mimeString});
-}
+    return new Blob([ia], { type: mimeString });
+  }
 
-public blobToFile = (theBlob: Blob, fileName:string): File => {
-  const b: any = theBlob;
-  // A Blob() is almost a File() - it's just missing the two properties below which we will add
-  b.lastModifiedDate = new Date();
-  b.name = fileName;
+  public blobToFile = (theBlob: Blob, fileName: string): File => {
+    const b: any = theBlob;
+    // A Blob() is almost a File() - it's just missing the two properties below which we will add
+    b.lastModifiedDate = new Date();
+    b.name = fileName;
 
-  // Cast to a File() type
-  return b
-}
+    // Cast to a File() type
+    return b
+  }
 
 }
 export default LoginHOC(configureLoginProps)(Header);

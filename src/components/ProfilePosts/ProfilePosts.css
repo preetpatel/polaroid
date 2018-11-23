@@ -144,7 +144,24 @@ img {
     margin: 1rem;
     color: #fff;
     cursor: pointer;
+
 }
+
+.card-signin {
+    border: 0;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-signin .card-title {
+    margin-bottom: 0.2rem;
+    font-weight: 300;
+    font-size: 2rem;
+  }
+  
+  .card-signin .card-body {
+    padding: 2rem;
+  }
 
 .gallery-item:hover .gallery-item-info,
 .gallery-item:focus .gallery-item-info {

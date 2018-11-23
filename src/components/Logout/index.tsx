@@ -2,6 +2,9 @@ import * as React from "react";
 import {Component} from 'react';
 import LoginHOC from 'react-facebook-login-hoc';
 import {BrowserRouter as Router, withRouter} from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+
 
 const configureLoginProps = {
     scope: 'public_profile',
@@ -51,9 +54,22 @@ const configureLoginProps = {
     public render() {
       return (
           <Router>
-        <div>
-          <button onClick={ this.logoutFacebook }>Confirm logout</button>
-        </div>
+        <div className="container">
+                    <div className="row">
+                        <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                            <div className="card card-signin my-5">
+                                <div className="card-body">
+                                    <h2 className="card-title text-center"><strong>Thanks from Polaroid</strong></h2>
+                                    <p className="text-center">Come back soon!</p>
+                                    <div className="form-signin">
+                                        <hr className="my-4" />
+                                        <button className="btn btn-lg btn-facebook btn-block text-uppercase" onClick={this.logoutFacebook}><FontAwesomeIcon icon={faSignOutAlt}/> Confirm Sign out</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </Router>
       );
     }

@@ -16,13 +16,19 @@ interface IState {
 class Posts extends Component<IProps, IState> {
     public constructor(props:any) {
         super(props)
+        this.state = ({
+            posts: [<div key={"-1"} id={"0"} className=" container pb-4 loader"/>],
+                userData: null
+            })
 
         const userData = localStorage.getItem("userData")
-        if (userData != null) {
+        if (userData !== null) {
             const userDataJSON = JSON.parse(userData)
-            if (userDataJSON.userName == null) {
+            if (userDataJSON.userName === null) {
                 this.props.history.push("/login");
+                return;
             } else {
+                console.log("hmm not null")
                 this.state = ({
                 posts: [<div key={"-1"} id={"0"} className=" container pb-4 loader"/>],
                     userData: userDataJSON
@@ -31,6 +37,7 @@ class Posts extends Component<IProps, IState> {
             }
         } else {
             this.props.history.push("/login");
+            return;
         }
     }
 

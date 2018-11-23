@@ -2,6 +2,10 @@ import * as React from "react";
 import { Component } from 'react';
 import LoginHOC from 'react-facebook-login-hoc';
 import { BrowserRouter as Router, withRouter } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPhoneSquare } from '@fortawesome/free-solid-svg-icons'
+
+let cssLoaded = false;
 
 const configureLoginProps = {
     scope: 'public_profile',
@@ -39,6 +43,7 @@ class Login extends Component<IProps, {}> {
     }
 
     public getStatus = (response: any) => {
+        console.log(response)
         if (response.authResponse) {
             this.responseApi.call(this, response.authResponse)
         }
@@ -97,11 +102,27 @@ class Login extends Component<IProps, {}> {
         this.logout()
     }
     public render() {
+        if (cssLoaded === false) {
+            cssLoaded = true;
+            require('src/components/Login/Login.css');
+        }
         return (
             <Router>
-                <div>
-                    <button onClick={this.loginFacebook}>Facebook Login</button>
-                    <button onClick={this.checkLoginState}>Check Login</button>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                            <div className="card card-signin my-5">
+                                <div className="card-body">
+                                    <h2 className="card-title text-center"><strong>Welcome To Polaroid</strong></h2>
+                                    <p className="text-center">Share Memories & Connect With Friends</p>
+                                    <div className="form-signin">
+                                        <hr className="my-4" />
+                                        <button className="btn btn-lg btn-facebook btn-block text-uppercase" onClick={this.loginFacebook}><FontAwesomeIcon icon={faPhoneSquare}/> Sign in with Facebook</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </Router>
         );

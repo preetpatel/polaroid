@@ -1,8 +1,25 @@
 /* src/components/Post/Post.css */
+
+.card-signin {
+  border: 0;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+}
+
+.card-signin .card-title {
+  margin-bottom: 0.2rem;
+  font-weight: 300;
+  font-size: 2rem;
+}
+
+.card-signin .card-body {
+  padding: 2rem;
+}
+
 .Post {
-    border-radius: 3px;
+    /* border-radius: 3px;
     border: 1px solid #e6e6e6;
-    background-color: #fff;
+    background-color: #fff; */
     margin-bottom: 60px;
     margin-left : 20%;
     margin-right: 20%;

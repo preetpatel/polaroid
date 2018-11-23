@@ -140,7 +140,7 @@ class Profile extends Component<IProps, IState>{
                 <div className="profile-user-settings">
                     <h1 className="profile-user-name">{this.state.username}</h1>
                     <div>
-                        <button className="btn profile-edit-btn" onClick={this.onOpenModal}>Edit Profile</button>
+                        <button className="profile-edit-btn" onClick={this.onOpenModal}>Edit Profile</button>
                         <Modal open={open} onClose={this.onCloseModal} center>
                             <div className="form pt-3">
                                 <h2>Edit your profile</h2>
@@ -199,7 +199,6 @@ class Profile extends Component<IProps, IState>{
                             <Button onClick={this.submitForm}>Update Profile</Button>
                         </Modal>
                     </div>
-                    <button className="btn profile-settings-btn" aria-label="profile settings"><i className="fas fa-cog" aria-hidden="false" /></button>
                 </div>
             )
         } else {
@@ -224,7 +223,7 @@ class Profile extends Component<IProps, IState>{
             <div className="Profile-view">
                 <header>
                     <div className="container">
-                        <div className="profile">
+                        <div className="profile card profile-flat-user-settings">
                             <div className="profile-image">
                                 <img src={this.state.avatarURL} alt="" />
                             </div>

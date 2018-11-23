@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Redirect } from 'react-router-dom'
 import {
-    Container, Col,
+     Col,
     FormGroup, Label, Input,
-    Button, FormFeedback
+     FormFeedback
 } from 'reactstrap';
 
 interface IState {
@@ -26,22 +26,22 @@ class Registration extends React.Component<{}, IState>{
             this.state = {
                 usernameValid: "",
                 bio: "",
-                userName: "" ,
+                userName: "",
                 name: userDataJSON.name,
                 email: userDataJSON.email,
                 avatarUrl: userDataJSON.avatarUrl,
-                registrationComplete: false, 
-            } 
+                registrationComplete: false,
+            }
         } else {
             this.state = {
                 usernameValid: "",
                 bio: "",
-                userName: "" ,
+                userName: "",
                 name: "",
                 email: "",
                 avatarUrl: "",
-                registrationComplete: true, 
-            } 
+                registrationComplete: true,
+            }
         }
     }
 
@@ -49,76 +49,141 @@ class Registration extends React.Component<{}, IState>{
         require('./Registration.css');
         let redirection;
         if (this.state.registrationComplete) {
-            redirection = (<Redirect to="/login"/> )
+            redirection = (<Redirect to="/login" />)
         }
         return (
-            <Container className="App pt-3">
+            <div className="container">
                 {redirection}
-                <div className="">
-                    <h2>Hey, {this.state.name}!</h2>
-                </div>
-                <h3 className="text-center text-justify">We just need a few more details</h3>
-                <div className="form">
-                    <Col>
-                        <FormGroup>
-                            <Label>Email</Label>
-                            <Input
-                                type="email"
-                                name="email"
-                                id="exampleEmail"
-                                disabled= {true}
-                                placeholder={this.state.email}
-                            />
-                        </FormGroup>
-                    </Col>
-                    <Col>
-                        <FormGroup>
-                            <Label for="username">Username</Label>
-                            <Input
-                                type="text"
-                                name="username"
-                                id="username"
-                                placeholder="Something catchy"
-                                valid={this.state.usernameValid === 'has-success'}
-                                invalid={this.state.usernameValid === 'has-danger'}
-                                onChange={ (e) => {
-                                    this.validateUsername(e)
-                                  } }
-                            />
-                            <FormFeedback valid>
-                                That's a tasty looking username you've got there.
+                <div className="row">
+                    <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                        <div className="card card-signin my-5">
+                            <div className="card-body">
+                                <h2 className="card-title text-center"><strong>Hey, {this.state.name}!</strong></h2>
+                                <p className="text-center">We just need a few more details</p>
+                                <div className="form-signin">
+                                    <hr className="my-4" />
+                                    <Col>
+                                        <FormGroup>
+                                            <Label>Email</Label>
+                                            <Input
+                                                type="email"
+                                                name="email"
+                                                id="exampleEmail"
+                                                disabled={true}
+                                                placeholder={this.state.email}
+                                            />
+                                        </FormGroup>
+                                    </Col>
+                                    <Col>
+                                        <FormGroup>
+                                            <Label for="username">Username</Label>
+                                            <Input
+                                                type="text"
+                                                name="username"
+                                                id="username"
+                                                placeholder="Something catchy"
+                                                valid={this.state.usernameValid === 'has-success'}
+                                                invalid={this.state.usernameValid === 'has-danger'}
+                                                onChange={(e) => {
+                                                    this.validateUsername(e)
+                                                }}
+                                            />
+                                            <FormFeedback valid>
+                                                That's a tasty looking username you've got there.
                             </FormFeedback>
-                            <FormFeedback invalid>
-                                Uh oh! Looks like that username is taken or is invalid. Try another one!
+                                            <FormFeedback invalid>
+                                                Uh oh! Looks like that username is taken or is invalid. Try another one!
                             </FormFeedback>
-                        </FormGroup>
-                    </Col>
-                    <Col>
-                        <FormGroup>
-                            <Label for="username">Bio</Label>
-                            <Input
-                                type="text"
-                                name="bio"
-                                id="bio"
-                                placeholder="Whats up with you?"
-                                onChange={ (e) => {
-                                    this.updateBioState(e)
-                                  } }
-                            />
-                        </FormGroup>
-                    </Col>
-                    <Button onClick={this.submitForm}>Submit</Button>
+                                        </FormGroup>
+                                    </Col>
+                                    <Col>
+                                        <FormGroup>
+                                            <Label for="username">Bio</Label>
+                                            <Input
+                                                type="text"
+                                                name="bio"
+                                                id="bio"
+                                                placeholder="Whats up with you?"
+                                                onChange={(e) => {
+                                                    this.updateBioState(e)
+                                                }}
+                                            />
+                                        </FormGroup>
+                                    </Col>
+                                    <button className="btn btn-lg btn-facebook btn-block text-uppercase" onClick={this.submitForm}>Let's Go!</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </Container>
+            </div>
+            // <Container className="App pt-3">
+            //     {redirection}
+            //     <div className="">
+            //         <h2>Hey, {this.state.name}!</h2>
+            //     </div>
+            //     <h3 className="text-center text-justify">We just need a few more details</h3>
+            //     <div className="form">
+            //         <Col>
+            //             <FormGroup>
+            //                 <Label>Email</Label>
+            //                 <Input
+            //                     type="email"
+            //                     name="email"
+            //                     id="exampleEmail"
+            //                     disabled= {true}
+            //                     placeholder={this.state.email}
+            //                 />
+            //             </FormGroup>
+            //         </Col>
+            //         <Col>
+            //             <FormGroup>
+            //                 <Label for="username">Username</Label>
+            //                 <Input
+            //                     type="text"
+            //                     name="username"
+            //                     id="username"
+            //                     placeholder="Something catchy"
+            //                     valid={this.state.usernameValid === 'has-success'}
+            //                     invalid={this.state.usernameValid === 'has-danger'}
+            //                     onChange={ (e) => {
+            //                         this.validateUsername(e)
+            //                       } }
+            //                 />
+            //                 <FormFeedback valid>
+            //                     That's a tasty looking username you've got there.
+            //                 </FormFeedback>
+            //                 <FormFeedback invalid>
+            //                     Uh oh! Looks like that username is taken or is invalid. Try another one!
+            //                 </FormFeedback>
+            //             </FormGroup>
+            //         </Col>
+            //         <Col>
+            //             <FormGroup>
+            //                 <Label for="username">Bio</Label>
+            //                 <Input
+            //                     type="text"
+            //                     name="bio"
+            //                     id="bio"
+            //                     placeholder="Whats up with you?"
+            //                     onChange={ (e) => {
+            //                         this.updateBioState(e)
+            //                       } }
+            //                 />
+            //             </FormGroup>
+            //         </Col>
+            //         <Button onClick={this.submitForm}>Submit</Button>
+            //     </div>
+            // </Container>
         )
     }
 
-    public submitForm = (e:any) => {
+    public submitForm = (e: any) => {
         e.preventDefault();
         if (this.state.usernameValid === "has-success") {
 
             const formData = new FormData()
-		    formData.append("username", this.state.userName)
+            formData.append("username", this.state.userName)
             formData.append("name", this.state.name)
             formData.append("email", this.state.email)
             formData.append("avatarURL", this.state.avatarUrl)
@@ -134,44 +199,44 @@ class Registration extends React.Component<{}, IState>{
                         // Error State
                         alert(response.statusText)
                     } else {
-                      this.setState({
-                          registrationComplete: true
-                      })
+                        this.setState({
+                            registrationComplete: true
+                        })
                     }
                 })
         }
-      }
+    }
 
-    public updateBioState = (e:any) => {
+    public updateBioState = (e: any) => {
         this.setState({
             bio: e.target.value
         })
-    } 
+    }
 
 
     // Checks to see if username already exists or not
-    public validateUsername = (e:any) => {
+    public validateUsername = (e: any) => {
         let userField: string = e.target.value;
         userField = userField.toLowerCase();
         const userNameValidateURL = "https://apipolaroid.azurewebsites.net/api/UserItems/byUsername/" + userField
-    fetch(userNameValidateURL, {
-			method: 'GET'
-		})
-			.then(res => res.json())
-			.then(json => {
-				if (json[0] == null && userField.length > 3) {
-					this.setState({
+        fetch(userNameValidateURL, {
+            method: 'GET'
+        })
+            .then(res => res.json())
+            .then(json => {
+                if (json[0] == null && userField.length > 3) {
+                    this.setState({
                         usernameValid: 'has-success',
-                        userName : userField
+                        userName: userField
                     })
-				} else {
+                } else {
                     this.setState({
                         usernameValid: 'has-danger',
-                        userName : userField
+                        userName: userField
                     })
                 }
-				
-			});
+
+            });
     }
 }
 export default Registration;

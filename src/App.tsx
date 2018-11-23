@@ -8,6 +8,7 @@ import Profile from './components/Profile';
 import Registration from './components/Registration';
 import Login from './components/Login';
 import Logout from './components/Logout';
+import Explore from './components/Explore';
 
 interface IState {
   user : {
@@ -37,10 +38,6 @@ class App extends Component<{}, IState> {
     }
   }
 
-  public componentDidMount = () => {
-    this.updateState()
-  }
-
   public render() {
 
     // Loads home page with posts from users they are following
@@ -68,52 +65,14 @@ class App extends Component<{}, IState> {
         <Route path="/logout" exact render={
           () => <Logout /> 
         }/>
+
+        <Route path="/explore" exact render={
+          () => <Explore /> 
+        }/>
       </Switch>
       </div>
       </BrowserRouter>
     );
   }
-
-public updateState = () => {
-  // this.setState((previousState: any, currentProps: any) => {
-  //   return { ...previousState, 
-  //     user: {
-  //       id: localStorage.getItem("userData.userName")
-  //     }
-  //   }
-  // })
-  console.log(localStorage.getItem("userData"))
-}
-
-  // private fetchPosts = async () => {
-  //   let allUsersIFollow;
-  //   const userID = localStorage.getItem("userItem.id");
-  //   const url = "https://apipolaroid.azurewebsites.net/api/Relationships/following/" + userID
-  //   const followingResponse = await fetch(url, { method: 'GET' });
-  //   const followingjson = await followingResponse.json;
-  //   allUsersIFollow = followingjson
-
-  //   console.log(allUsersIFollow)
-  //   const urlGetPosts = "https://apipolaroid.azurewebsites.net/api/postitems"
-  //   const response = await fetch(urlGetPosts, { method: 'GET' });
-  //   const json = await response.json;
-
-  //   // If no posts are returned, then set a default post that says that you dont follow anyone
-  //   const firstPost = json[0]
-  //   if (firstPost === undefined) {
-  //     json[0] = {
-  //       "id": 1,
-  //       "userID": 1,
-  //       "imageURL": "https://pbs.twimg.com/media/DOXI0IEXkAAkokm.jpg",
-  //       "caption": "Welp! You aren't following anyone",
-  //       "uploaded": "2018-11-21T22:29:49.778365",
-  //       "likes": 0
-  //     }
-  //   }
-  //   this.setState((previousState: any, currentProps: any) => {
-  //     return { ...previousState, posts: json }
-  //   })
-  // }
-
 }
 export default App;

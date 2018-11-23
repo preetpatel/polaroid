@@ -56,6 +56,7 @@ class ProfilePosts extends Component<IProps,IState>{
         // tslint:disable-next-line:prefer-for-of
          for (let i = 0; i < json.length; i++) {
              postsCollection.push(
+                
                 <div className="gallery-item" >
                                 <img src={json[i].imageURL} className="gallery-image" alt={json[i].caption} />
                                 <div className="gallery-item-info">

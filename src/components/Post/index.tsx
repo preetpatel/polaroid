@@ -41,7 +41,9 @@ class Post extends Component<IProps, IState> {
     const caption = this.props.caption;
     const likes = this.state.likes;
 
-    return <article className="Post" ref={this.myRef}>
+    return (
+    <article className="Post" ref={this.myRef}>
+    <div className="card card-signin">
       <header>
         <NavLink to={"/profile?id=" + this.props.userID} style={{textDecoration: 'none', color:'black'}} className="Post-user">
           <div className="Post-user-avatar">
@@ -63,7 +65,10 @@ class Post extends Component<IProps, IState> {
           <img className="Like-image" src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Love_Heart_symbol.svg" /> {likes}
         </div>
       </div>
-    </article>;
+      </div>
+    </article>
+    
+    );
   }
 
   public handleDoubleClick = (event: any) => {

@@ -1,5 +1,7 @@
 # Polaroid
 ## A React based photo-sharing Application
+# Before you use the app
+Please make sure you have any form of Adblock disabled. Facebook APIs dont like that and neither does my app
 
 ### Registration and Login
 ![Login Page](https://i.imgur.com/9J5qiWg.jpg)
